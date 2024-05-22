@@ -1,5 +1,10 @@
 * { 
      box-sizing: border-box; 
+     /* background-color: black; */
+}
+
+body{
+    background-color: black;
 }
 
 .board {     
@@ -11,7 +16,7 @@
 }  
 
 .cell {
-    background-color: rgba(14, 13, 21, 0.244);
+    background-color: rgba(252, 252, 255, 0.431);
     height: 28px;
     width: 28px;
 

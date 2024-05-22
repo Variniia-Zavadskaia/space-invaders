@@ -1,4 +1,6 @@
 const ALIEN = '<img src="img/ali.png" />'
+const ALIEN_ROW_LENGTH = 8
+const ALIEN_ROW_COUNT = 3
 const ALIEN_SPEED = 500
 var gIntervalAliens
 var gAliensCount = 0;
