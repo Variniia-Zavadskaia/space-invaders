@@ -1,0 +1,22 @@
+* { 
+     box-sizing: border-box; 
+}
+
+.board {     
+    width: min-content;
+    margin: 40px auto 0; 
+
+    border-left: 1px solid darkgray;
+    border-bottom: 1px solid darkgray;
+}  
+
+.cell {
+    background-color: rgba(14, 13, 21, 0.244);
+    height: 28px;
+    width: 28px;
+
+}
+
+img {
+    height: 28px;
+}
