@@ -23,6 +23,7 @@ function createHero(board) {
     }
 
     board[gHero.pos.i][gHero.pos.j] = createCell(HERO);
+    displaySuperAttacks(gHero.countSupAtt)
 }
 
 function onKeyDown(event) {
@@ -39,7 +40,6 @@ function onKeyDown(event) {
             shoot()
             break;
         case 'KeyN':
-            console.log("fddfd");
             if (!gHero.isShoot) return;
             nebsAlienAround(gLaser.pos);
             break;
@@ -55,7 +55,9 @@ function onKeyDown(event) {
             if (gHero.countSupAtt-- > 0) {
                 gHero.isSuperAttack = true
                 gLaser.speed /= 2;
+                gLaser.element = LASER_SUPER
                 shoot();
+                displaySuperAttacks(gHero.countSupAtt);
             }
             break;
         default: return null;
@@ -96,6 +98,7 @@ function shoot() {
             gHero.isShoot = false;
             gHero.isSuperAttack = false;
             gLaser.speed = LASER_SPEED;
+            gLaser.element = LASER
             clearInterval(gBlinkInterval);
             return
         }
@@ -106,7 +109,6 @@ function shoot() {
 function blinkLaser(pos) {
 
     var laser = gLaser.element;
-    laser = (gHero.isSuperAttack) ? LASER_SUPER : LASER;
 
     updateCell(pos, laser);
     setTimeout(() => { updateCell(pos, EMPTY_OBJ); }, gLaser.speed * 0.8);
@@ -122,5 +124,9 @@ function nebsAlienAround(pos) {
             if (gBoard[i][j].gameObject === ALIEN) handleAlienHit({ i, j });
         }
     }
+}
+
+function displaySuperAttacks(num) {
+    document.querySelector('.super-attacks span').innerText = num;
 }
 

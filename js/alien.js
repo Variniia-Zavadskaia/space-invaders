@@ -46,7 +46,7 @@ function handleAlienHit(pos) {
 function shiftBoardRight(board, fromI, toI) {
     for (var i = fromI; i <= toI; i++) {
         for (var j = board[i].length - 1; j > 0; j--) {
-            if (board[i][j - 1].gameObject !== LASER) {
+            if (board[i][j - 1].gameObject !== gLaser.element) {
                 // board[i][j].gameObject = board[i][j - 1].gameObject;
                 updateCell({i,j}, board[i][j - 1].gameObject)
             }
@@ -59,7 +59,7 @@ function shiftBoardRight(board, fromI, toI) {
 function shiftBoardLeft(board, fromI, toI) {
     for (var i = fromI; i <= toI; i++) {
         for (var j = 0; j < board[i].length - 1; j++) {
-            if (board[i][j + 1].gameObject !== LASER) {
+            if (board[i][j + 1].gameObject !== gLaser.element) {
                 // board[i][j].gameObject = board[i][j + 1].gameObject;
                 updateCell({i,j}, board[i][j + 1].gameObject)
 
@@ -74,7 +74,7 @@ function shiftBoardDown(board, fromI, toI) {
     // console.log(board)
     for (var i = toI; i >= fromI; i--) {
         for (var j = 0; j < board[i].length; j++) {
-            if (board[i][j].gameObject !== LASER) {
+            if (board[i][j].gameObject !== gLaser.element) {
                 // board[i + 1][j].gameObject = board[i][j].gameObject;
                 updateCell({i: (i + 1), j: j}, board[i][j].gameObject)
             }

@@ -29,7 +29,7 @@ function startGame(){
     renderBoard(gBoard);
     onCloseModal();
     gGame.score = 0;
-    document.querySelector('h2 span').innerText = gGame.score;
+    document.querySelector('.score span').innerText = gGame.score;
     gIntervalAliens = setInterval(moveAliens, ALIEN_SPEED);
 }
 
@@ -72,7 +72,7 @@ function renderBoard(board) {
 
 function updateScore(diff) {
     gGame.score += diff
-    document.querySelector('h2 span').innerText = gGame.score
+    document.querySelector('.score span').innerText = gGame.score
 }
 
 function updateCell(pos, gameObject = EMPTY_OBJ) {
