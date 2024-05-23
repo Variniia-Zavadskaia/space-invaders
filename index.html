@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,19 +9,25 @@
 </head>
 
 <body onload="onInit()" onkeydown="onKeyDown(event)">
+    <div class="stars"></div>
+    <div class="twinkling"></div>
 
-    <h2 class="box score">Score: <span>0</span></h2>
+    <div class="start"><button onclick="startGame()">Start Game</button></div>
 
-<!-- <div class="start" onclick="onStartGame()"></div> -->
+    <div class="box game">
+        <h1 class="head">SPACE INVADERS</h1>
+        <h2 class="score">SCORE: <span>0</span></h2>
+    </div>
 
-<table clsss="box">
-    <tbody class="board"></tbody>
-</table>
+    <table clsss="box">
+        <tbody class="board"></tbody>
+    </table>
 
-<div class="box restart">
-    <h2></h2>
-    <button onclick="onInit()">Play again</button>
-</div>
+    <div class="box restart">
+        <h2 class="msg"></h2>
+        <button onclick="startGame()">Restart</button>
+    </div>
+
 
     <script src="js/util.js"></script>
     <script src="js/game.js"></script>
@@ -28,4 +35,5 @@
     <script src="js/alien.js"></script>
 
 </body>
+
 </html>

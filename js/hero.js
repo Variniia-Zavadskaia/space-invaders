@@ -1,25 +1,30 @@
 const HERO = '<img src="img/sh.png" />'
 const LASER = '〽️'
-const LASER_SPEED = 50;
+const LASER_SUPER = '💗'
+const LASER_SPEED = 100;
+const ALIEN_POINTS = 10
 var gHero;
 var gLaser;
 var gBlinkInterval;
-// var laserPos;
-// creates the hero and place it on board
+
 function createHero(board) {
     gHero = {
         pos: { i: 12, j: 5 },
-        isShoot: false
+        isShoot: false,
+        isShootNebs: false,
+        isSuperAttack: false,
+        countSupAtt: 3
     }
 
     gLaser = {
-        element: LASER
+        element: LASER,
+        pos: null,
+        speed: LASER_SPEED
     }
 
     board[gHero.pos.i][gHero.pos.j] = createCell(HERO);
 }
 
-// Handle game keys
 function onKeyDown(event) {
 
     switch (event.code) {
@@ -27,16 +32,33 @@ function onKeyDown(event) {
             moveHero(-1)
             break
         case 'ArrowRight':
-            moveHero(1)
-            break
+            moveHero(1);
+            break;
         case 'Space':
-            if (gHero.isShoot) return
+            if (gHero.isShoot) return;
             shoot()
-            break
-        case 'ArrowDown':
-            moveAliens()
-            break
-        default: return null
+            break;
+        case 'KeyN':
+            console.log("fddfd");
+            if (!gHero.isShoot) return;
+            nebsAlienAround(gLaser.pos);
+            break;
+        case 'KeyF':
+            gIsAlienFreeze = true
+            break;
+        case 'KeyU':
+            gIsAlienFreeze = false
+            break;
+        case 'KeyX':
+            console.log(gHero.countSupAtt);
+            if (gHero.isShoot) return
+            if (gHero.countSupAtt-- > 0) {
+                gHero.isSuperAttack = true
+                gLaser.speed /= 2;
+                shoot();
+            }
+            break;
+        default: return null;
     }
 }
 
@@ -55,36 +77,50 @@ function moveHero(dir) {
 
 // Sets an interval for shutting (blinking) the laser up towards aliens
 function shoot() {
-    // if (!gGame.isOn) return;
+    if (!gGame.isOn) return;
     if (gHero.isShoot) return;
 
     gHero.isShoot = true;
-    var laserPos = { ...gHero.pos };
+    gLaser.pos = { ...gHero.pos };
 
     var gBlinkInterval = setInterval(() => {
-        laserPos.i--;
-        if (gBoard[laserPos.i][laserPos.j].gameObject === ALIEN || laserPos.i === 0) {
-            gHero.isShoot = false;
-            clearInterval(gBlinkInterval);
+        gLaser.pos.i--;
+        if (gBoard[gLaser.pos.i][gLaser.pos.j].gameObject === ALIEN || gLaser.pos.i === 0) {
 
-            if (gBoard[laserPos.i][laserPos.j].gameObject === ALIEN) {
-                handleAlienHit(laserPos);
-            } else if (laserPos.i === 0) {
-                blinkLaser(laserPos);
+            if (gBoard[gLaser.pos.i][gLaser.pos.j].gameObject === ALIEN) {
+                handleAlienHit(gLaser.pos);
+            } else if (gLaser.pos.i === 0) {
+                blinkLaser(gLaser.pos);
             }
+
+            gHero.isShoot = false;
+            gHero.isSuperAttack = false;
+            gLaser.speed = LASER_SPEED;
+            clearInterval(gBlinkInterval);
             return
         }
-        blinkLaser(laserPos);
-    }, LASER_SPEED)
-
+        blinkLaser(gLaser.pos);
+    }, gLaser.speed)
 }
 
-// renders a LASER at specific cell for short time and removes it
 function blinkLaser(pos) {
 
     var laser = gLaser.element;
+    laser = (gHero.isSuperAttack) ? LASER_SUPER : LASER;
 
     updateCell(pos, laser);
-    setTimeout(() => { updateCell(pos, EMPTY_OBJ); }, LASER_SPEED * 0.8);
+    setTimeout(() => { updateCell(pos, EMPTY_OBJ); }, gLaser.speed * 0.8);
+}
+
+function nebsAlienAround(pos) {
+    for (var i = pos.i - 1; i <= pos.i + 1; i++) {
+        if (i < 0 || i >= gBoard.length) continue;
+
+        for (var j = pos.j - 1; j <= pos.j + 1; j++) {
+            if (j < 0 || j >= gBoard[i].length) continue;
+            if (i === pos.i && j === pos.j) continue;
+            if (gBoard[i][j].gameObject === ALIEN) handleAlienHit({ i, j });
+        }
+    }
 }
 

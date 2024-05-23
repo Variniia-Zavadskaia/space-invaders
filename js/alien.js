@@ -1,8 +1,8 @@
 const ALIEN = '<img src="img/ali.png" />'
-// const ALIEN_ROW_LENGTH = 8;
-const ALIEN_ROW_LENGTH = 4;
+const ALIEN_ROW_LENGTH = 8;
+// const ALIEN_ROW_LENGTH = 4;
 const ALIEN_ROW_COUNT = 3;
-const ALIEN_SPEED = 600;
+const ALIEN_SPEED = 300;
 
 var gIntervalAliens;
 // var gIntervalAliensRight;
@@ -34,9 +34,11 @@ function createAliens(board) {
 }
 
 function handleAlienHit(pos) {
-    updateScore(10);
+    console.log(pos.i,pos.j);
+    updateScore(ALIEN_POINTS);
     updateCell(pos, EMPTY_OBJ);
     gGame.alienCount--;
+    console.log(gGame.alienCount);
 
     if (gGame.alienCount === 0) gameOver(true);
 }
@@ -45,10 +47,12 @@ function shiftBoardRight(board, fromI, toI) {
     for (var i = fromI; i <= toI; i++) {
         for (var j = board[i].length - 1; j > 0; j--) {
             if (board[i][j - 1].gameObject !== LASER) {
-                board[i][j].gameObject = board[i][j - 1].gameObject;
+                // board[i][j].gameObject = board[i][j - 1].gameObject;
+                updateCell({i,j}, board[i][j - 1].gameObject)
             }
         }
-        board[i][0].gameObject = EMPTY_OBJ
+        // board[i][0].gameObject = EMPTY_OBJ
+        updateCell({i: i, j: 0}, EMPTY_OBJ)
     }
 }
 
@@ -56,24 +60,29 @@ function shiftBoardLeft(board, fromI, toI) {
     for (var i = fromI; i <= toI; i++) {
         for (var j = 0; j < board[i].length - 1; j++) {
             if (board[i][j + 1].gameObject !== LASER) {
-                board[i][j].gameObject = board[i][j + 1].gameObject;
+                // board[i][j].gameObject = board[i][j + 1].gameObject;
+                updateCell({i,j}, board[i][j + 1].gameObject)
+
             }
         }
-        board[i][board[i].length - 1].gameObject = EMPTY_OBJ;
+        // board[i][board[i].length - 1].gameObject = EMPTY_OBJ;
+        updateCell({i: i, j: (board[i].length - 1)}, EMPTY_OBJ)
     }
 }
 
 function shiftBoardDown(board, fromI, toI) {
-    console.log(board)
+    // console.log(board)
     for (var i = toI; i >= fromI; i--) {
         for (var j = 0; j < board[i].length; j++) {
             if (board[i][j].gameObject !== LASER) {
-                board[i + 1][j].gameObject = board[i][j].gameObject;
+                // board[i + 1][j].gameObject = board[i][j].gameObject;
+                updateCell({i: (i + 1), j: j}, board[i][j].gameObject)
             }
         }
     }
     for (var j = 0; j < board[fromI].length; j++) {
-        board[fromI][j].gameObject = EMPTY_OBJ
+        // board[fromI][j].gameObject = EMPTY_OBJ
+        updateCell({i: fromI, j: j}, EMPTY_OBJ)
     }
 }
 // runs the interval for moving aliens side to side and down
@@ -116,7 +125,7 @@ function moveAliens() {
         }
         if(bottomRowAlientCount === 0) gAliensBottomRowIdx--;
     }
-    renderBoard(gBoard);
+    // renderBoard(gBoard);
     if (gAliensBottomRowIdx === (gBoard.length - 2)) gameOver(false);
 
     // gIsAlienFreeze = true

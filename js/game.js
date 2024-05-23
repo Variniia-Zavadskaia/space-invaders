@@ -11,6 +11,18 @@ var gGame = {
 // Called when game loads
 
 function onInit() {
+    var elModalStart = document.querySelector('.start');
+    elModalStart.style.display = 'block';
+    onCloseModal();
+}
+
+function startGame(){
+
+    var elModalStart = document.querySelector('.start');
+    elModalStart.style.display = 'none';
+
+    if (gGame.isOn) return
+    gGame.isOn = true
     gBoard = createBoard();
     createHero(gBoard);
     createAliens(gBoard);
@@ -70,20 +82,19 @@ function updateCell(pos, gameObject = EMPTY_OBJ) {
 }
 
 function gameOver(isWin){
-    console.log('hghghg');
     gGame.isOn = false;
     onOpenModal(isWin);
-    clearInterval(gIntervalAliens);   
+    clearInterval(gIntervalAliens); 
 }
 
 function onOpenModal(isWin) {
-    var elModal = document.querySelector('.restart');
-    elModal.style.display = 'block';
-    var elModalH2 = document.querySelector('.restart h2')
-    elModalH2.innerText = isWin ? 'you Won' : 'Game Over'
+    var elModalRest = document.querySelector('.restart');
+    elModalRest.style.display = 'block';
+    var elModalRestH2 = document.querySelector('.restart h2')
+    elModalRestH2.innerText = isWin ? 'you Won' : 'Game Over'
 }
 
 function onCloseModal() {
-    var elModal = document.querySelector('.restart');
-    elModal.style.display = 'none';
+    var elModalRest = document.querySelector('.restart');
+    elModalRest.style.display = 'none';
 }

@@ -1,38 +1,54 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
+
+
 .box {
-    background: black;
     color: blanchedalmond;
-    margin: auto;
     padding: 10px;
-    box-sizing: border-box;
 }
 
 body {
-    background-color: black;
+    text-align: center;
+    align-items: center;
+}
+.game{
+    position: fixed;
+    top: 10%;
+    left: 20%;
+    transform: translate(-50%, -50%);
 }
 
 h2 {
     color: aliceblue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;    
 }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(5, 60px);
-    grid-template-rows: repeat(5, 60px);
+h1{
+    left: 50%;
+}
 
-    width: min-content;
-    margin: 40px auto 0;
+.game h2{
+    float: left;
+    margin-top: 10%;
+}
+
+.board {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 5%;
 }
 
 .cell {
-    border-style: dotted;
-    border-color: rgb(47, 160, 12);
+    /* border-style: dotted; */
     font-size: 1.5em;
-    width: 2em;
-    height: 2em;
+    width: 1.8em;
+    height: 1.8em;
     border-radius: 0.6em;
 }
 
@@ -40,4 +56,103 @@ img {
     max-width: 100%;
     max-height: 100%;
     vertical-align: middle;
+}
+
+.start {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.start button {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border-radius: 0.6em;
+    cursor: pointer;
+    align-self: center;
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: 2em 3em;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+    border-color: rgba(0, 0, 255, 0.71);
+    color: #fff;
+    box-shadow: 0 0 40px 40px rgba(0, 0, 255, 0.43) inset, 0 0 0 0 rgb(0, 0, 255);
+    transition: all 150ms ease-in-out;
+}
+
+.start button:hover {
+    box-shadow: 0 0 10px 0 blue inset, 0 0 10px 4px blue;
+}
+
+.restart {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.restart button {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border-radius: 0.6em;
+    cursor: pointer;
+    align-self: center;
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 1.2em 2.5em;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+    border-color: rgba(34, 34, 44, 0.755);
+    color: #fff;
+    box-shadow: 0 0 40px 40px rgba(66, 66, 100, 0.778) inset, 0 0 0 0 rgb(53, 53, 80);
+    transition: all 150ms ease-in-out;
+}
+
+.restart button:hover {
+    box-shadow: 0 0 10px 0 rgb(56, 56, 65) inset, 0 0 10px 4px rgb(85, 85, 102);
+}
+
+.restart h2{
+    margin-bottom: 10%;
+    font-size: 40px;
+
+}
+.stars,
+.twinkling {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.stars {
+    background: #000 url(https://i.postimg.cc/hhFD7Nkf/apps-47636-13819498107583324-fb06b53a-4974-4acb-85e6-f6f363f85ab6-edec48d0-ec35-4a1f-8bf5-c455987b4a.png) repeat top center;
+    z-index: -1;
+}
+
+.twinkling {
+    background-image: url(https://i.postimg.cc/CLpNr4PF/twinkling.png);
+    animation: 3s twinkle infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes twinkle {
+    from {
+        backrgound-position: 0
+    }
+
+    to {
+        background-position: -100px 0
+    }
 }
