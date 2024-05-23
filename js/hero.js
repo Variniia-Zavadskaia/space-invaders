@@ -1,6 +1,6 @@
 const HERO = '<img src="img/sh.png" />'
 const LASER = '〽️'
-const LASER_SPEED = 100;
+const LASER_SPEED = 50;
 var gHero;
 var gLaser;
 var gBlinkInterval;

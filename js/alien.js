@@ -1,7 +1,8 @@
 const ALIEN = '<img src="img/ali.png" />'
-const ALIEN_ROW_LENGTH = 8;
+// const ALIEN_ROW_LENGTH = 8;
+const ALIEN_ROW_LENGTH = 4;
 const ALIEN_ROW_COUNT = 3;
-const ALIEN_SPEED = 400;
+const ALIEN_SPEED = 600;
 
 var gIntervalAliens;
 // var gIntervalAliensRight;
@@ -43,8 +44,9 @@ function handleAlienHit(pos) {
 function shiftBoardRight(board, fromI, toI) {
     for (var i = fromI; i <= toI; i++) {
         for (var j = board[i].length - 1; j > 0; j--) {
-            board[i][j].gameObject = board[i][j - 1].gameObject;
-            if (i === gHero.pos.i && j === gHero.pos.j) gameOver(false);
+            if (board[i][j - 1].gameObject !== LASER) {
+                board[i][j].gameObject = board[i][j - 1].gameObject;
+            }
         }
         board[i][0].gameObject = EMPTY_OBJ
     }
@@ -53,8 +55,9 @@ function shiftBoardRight(board, fromI, toI) {
 function shiftBoardLeft(board, fromI, toI) {
     for (var i = fromI; i <= toI; i++) {
         for (var j = 0; j < board[i].length - 1; j++) {
-            board[i][j].gameObject = board[i][j + 1].gameObject;
-            if (i === gHero.pos.i && j === gHero.pos.j) gameOver(false);
+            if (board[i][j + 1].gameObject !== LASER) {
+                board[i][j].gameObject = board[i][j + 1].gameObject;
+            }
         }
         board[i][board[i].length - 1].gameObject = EMPTY_OBJ;
     }
@@ -64,7 +67,9 @@ function shiftBoardDown(board, fromI, toI) {
     console.log(board)
     for (var i = toI; i >= fromI; i--) {
         for (var j = 0; j < board[i].length; j++) {
-            board[i + 1][j].gameObject = board[i][j].gameObject;
+            if (board[i][j].gameObject !== LASER) {
+                board[i + 1][j].gameObject = board[i][j].gameObject;
+            }
         }
     }
     for (var j = 0; j < board[fromI].length; j++) {
@@ -102,9 +107,14 @@ function moveAliens() {
     }
 
     if (shiftDown) {
+        var bottomRowAlientCount = 0;
         shiftBoardDown(gBoard, gAliensTopRowIdx, gAliensBottomRowIdx);
         gAliensTopRowIdx++;
         gAliensBottomRowIdx++;
+        for (var j = 0; j < gBoard[0].length; j++) {
+            if (gBoard[gAliensBottomRowIdx][j].gameObject === ALIEN) bottomRowAlientCount++;
+        }
+        if(bottomRowAlientCount === 0) gAliensBottomRowIdx--;
     }
     renderBoard(gBoard);
     if (gAliensBottomRowIdx === (gBoard.length - 2)) gameOver(false);

@@ -2,35 +2,42 @@
     box-sizing: border-box;
 }
 
-/* .box {
+.box {
+    background: black;
+    color: blanchedalmond;
     margin: auto;
-} */
+    padding: 10px;
+    box-sizing: border-box;
+}
 
 body {
     background-color: black;
-    /* background-color: rgba(252, 252, 255, 0.431); */
 }
 
 h2 {
     color: aliceblue;
 }
 
-.board-container {
-    margin: auto;
+.container {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    grid-template-rows: repeat(5, 60px);
 
+    width: min-content;
+    margin: 40px auto 0;
 }
 
 .cell {
-    border-style: hidden;
-    /* border-color: rgb(47, 160, 12); */
+    border-style: dotted;
+    border-color: rgb(47, 160, 12);
     font-size: 1.5em;
     width: 2em;
     height: 2em;
-    /* box-shadow: 0 0 10px 0 rgb(10, 169, 21) inset, 0 0 10px 4px rgb(10, 169, 21); */
     border-radius: 0.6em;
 }
 
 img {
-width:30px;
-height:30px;
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
 }
