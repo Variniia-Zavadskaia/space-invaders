@@ -1,20 +1,24 @@
 const BOARD_SIZE = 14
 const SKY = 'SKY'
 const EARTH = 'EARTH'
+const EMPTY_OBJ = null
 
 var gBoard
-var gSize
-var gInGame
 var gGame = {
     isOn: false,
     alienCount: 0
 }
 // Called when game loads
-gBoard = createBoard();
+
 function onInit() {
+    gBoard = createBoard();
     createHero(gBoard);
     createAliens(gBoard);
     renderBoard(gBoard);
+    onCloseModal();
+    gGame.score = 0;
+    document.querySelector('h2 span').innerText = gGame.score;
+    gIntervalAliens = setInterval(moveAliens, ALIEN_SPEED);
 }
 
 function createBoard() {
@@ -54,16 +58,32 @@ function renderBoard(board) {
     elContainer.innerHTML = strHTML;
 }
 
-function createCell(gameObject = null) {
-    return {
-        type: SKY,
-        gameObject: gameObject
-    }
+function updateScore(diff) {
+    gGame.score += diff
+    document.querySelector('h2 span').innerText = gGame.score
 }
 
-function updateCell(pos, gameObject = null) {
+function updateCell(pos, gameObject = EMPTY_OBJ) {
     gBoard[pos.i][pos.j].gameObject = gameObject
     var elCell = getElCell(pos)
     elCell.innerHTML = gameObject || ''
 }
 
+function gameOver(isWin){
+    console.log('hghghg');
+    gGame.isOn = false;
+    onOpenModal(isWin);
+    clearInterval(gIntervalAliens);   
+}
+
+function onOpenModal(isWin) {
+    var elModal = document.querySelector('.restart');
+    elModal.style.display = 'block';
+    var elModalH2 = document.querySelector('.restart h2')
+    elModalH2.innerText = isWin ? 'you Won' : 'Game Over'
+}
+
+function onCloseModal() {
+    var elModal = document.querySelector('.restart');
+    elModal.style.display = 'none';
+}

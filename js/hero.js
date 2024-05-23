@@ -33,25 +33,25 @@ function onKeyDown(event) {
             if (gHero.isShoot) return
             shoot()
             break
+        case 'ArrowDown':
+            moveAliens()
+            break
         default: return null
     }
 }
 
 function moveHero(dir) {
     if (dir === 1 && (gHero.pos.j !== BOARD_SIZE - 1)) {
-        updateCell(gHero.pos, null);
+        updateCell(gHero.pos, EMPTY_OBJ);
         gHero.pos.j++;
         updateCell(gHero.pos, HERO);
     }
     if (dir === -1 && (gHero.pos.j !== 0)) {
-        updateCell(gHero.pos, null);
+        updateCell(gHero.pos, EMPTY_OBJ);
         gHero.pos.j--;
         updateCell(gHero.pos, HERO);
     }
 }
-
-
-
 
 // Sets an interval for shutting (blinking) the laser up towards aliens
 function shoot() {
@@ -64,13 +64,14 @@ function shoot() {
     var gBlinkInterval = setInterval(() => {
         laserPos.i--;
         if (gBoard[laserPos.i][laserPos.j].gameObject === ALIEN || laserPos.i === 0) {
-            clearInterval(gBlinkInterval)
+            gHero.isShoot = false;
+            clearInterval(gBlinkInterval);
+
             if (gBoard[laserPos.i][laserPos.j].gameObject === ALIEN) {
-                // updateScore(10);
-                updateCell(laserPos, '')
-            } else if(laserPos.i === 0) blinkLaser(laserPos);
-            // updateCell(laserPos, '')
-            gHero.isShoot = false
+                handleAlienHit(laserPos);
+            } else if (laserPos.i === 0) {
+                blinkLaser(laserPos);
+            }
             return
         }
         blinkLaser(laserPos);
@@ -84,6 +85,6 @@ function blinkLaser(pos) {
     var laser = gLaser.element;
 
     updateCell(pos, laser);
-    setTimeout(() => { updateCell(pos, null); }, LASER_SPEED * 0.8);
+    setTimeout(() => { updateCell(pos, EMPTY_OBJ); }, LASER_SPEED * 0.8);
 }
 
