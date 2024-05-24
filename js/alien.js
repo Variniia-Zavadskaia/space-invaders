@@ -2,17 +2,13 @@ const ALIEN = '<img src="img/ali.png" />'
 const ALIEN_ROW_LENGTH = 8;
 // const ALIEN_ROW_LENGTH = 4;
 const ALIEN_ROW_COUNT = 3;
-const ALIEN_SPEED = 500;
+const ALIEN_SPEED = 700;
 
 var gIntervalAliens;
 // var gIntervalAliensRight;
 // var gIntervalAliensLeft;
 // var gIntervalAliensDown;
 
-// The following two variables represent the part of the matrix (some rows)
-// that we should shift (left, right, and bottom)
-// We need to update those when:
-// (1) shifting down and (2) last alien was cleared from row
 var gAliensTopRowIdx; //from
 var gAliensBottomRowIdx;  //to
 var gMoveDir = 'right';
@@ -35,6 +31,7 @@ function createAliens(board) {
 
 function handleAlienHit(pos) {
     console.log(pos.i,pos.j);
+    printBoard('hit');
     updateScore(ALIEN_POINTS);
     updateCell(pos, EMPTY_OBJ);
     gGame.alienCount--;
@@ -85,13 +82,12 @@ function shiftBoardDown(board, fromI, toI) {
         updateCell({i: fromI, j: j}, EMPTY_OBJ)
     }
 }
-// runs the interval for moving aliens side to side and down
-// it re-renders the board every time
-// when the aliens are reaching the hero row - interval stops
 
 function moveAliens() {
     if (gIsAlienFreeze) return;
     var shiftDown = false;
+
+    console.log('move ' + gMoveDir + ' start');
 
     if (gMoveDir === 'right') {
         for (var i = gAliensTopRowIdx; i <= gAliensBottomRowIdx; i++) {
@@ -125,8 +121,24 @@ function moveAliens() {
         }
         if(bottomRowAlientCount === 0) gAliensBottomRowIdx--;
     }
+    printBoard('move ' + gMoveDir);
+    checkAllienCount()
     // renderBoard(gBoard);
     if (gAliensBottomRowIdx === (gBoard.length - 2)) gameOver(false);
-
+    
     // gIsAlienFreeze = true
+}
+
+function checkAllienCount() {
+    var count = 0
+    for (var i = gAliensTopRowIdx; i <= gAliensBottomRowIdx; i++) {
+        for (var j = 0; j < gBoard[i].length; j++) {
+            if (gBoard[i][j].gameObject === ALIEN) count++
+
+        }
+    }
+    if (count !== gGame.alienCount) {
+        gIsAlienFreeze = true
+        console.log('!!!!! BAD COUNT!!!!!', count, gGame.alienCount);
+    }
 }

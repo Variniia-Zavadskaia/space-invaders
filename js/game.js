@@ -1,6 +1,6 @@
 const BOARD_SIZE = 14
 const SKY = 'SKY'
-const EARTH = 'EARTH'
+const EARTH = 'EAR'
 const EMPTY_OBJ = null
 
 var gBoard
@@ -24,6 +24,7 @@ function startGame(){
     if (gGame.isOn) return
     gGame.isOn = true
     gBoard = createBoard();
+    printBoard(''); ////////////
     createHero(gBoard);
     createAliens(gBoard);
     renderBoard(gBoard);
@@ -45,6 +46,7 @@ function createBoard() {
         }
     }
     console.table(board);
+    console.log("dfddfwf");
     return board;
 }
 
@@ -68,6 +70,10 @@ function renderBoard(board) {
 
     var elContainer = document.querySelector('.board');
     elContainer.innerHTML = strHTML;
+}
+
+function addCandy(){
+    // var 
 }
 
 function updateScore(diff) {
@@ -97,4 +103,25 @@ function onOpenModal(isWin) {
 function onCloseModal() {
     var elModalRest = document.querySelector('.restart');
     elModalRest.style.display = 'none';
+}
+
+function printBoard(prestr) {
+    var str = prestr === '' ? '' : (prestr + '\n')
+
+    for (var i = 0; i < gBoard.length; i++) {
+        str += '| '
+        for (var j = 0; j < gBoard[i].length; j++) {
+            var obj = gBoard[i][j].gameObject
+
+            if (obj === null) obj = 'n'
+            else if (obj === HERO) obj = 'H'
+            else if (obj === ALIEN) obj = 'Al'
+
+            if (obj !== 'Al') obj += ' '
+
+            str += gBoard[i][j].type + ',' + obj + ' | '
+        }
+        str += '\n'
+    }   
+    console.log(str);
 }

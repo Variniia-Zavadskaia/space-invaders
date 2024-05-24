@@ -1,7 +1,7 @@
 const HERO = '<img src="img/sh.png" />'
-const LASER = '〽️'
-const LASER_SUPER = '💗'
-const LASER_SPEED = 100;
+const LASER = '⚡️'
+const LASER_SUPER = '〽️'
+const LASER_SPEED = 80;
 const ALIEN_POINTS = 10
 var gHero;
 var gLaser;
@@ -109,9 +109,12 @@ function shoot() {
 function blinkLaser(pos) {
 
     var laser = gLaser.element;
-
     updateCell(pos, laser);
-    setTimeout(() => { updateCell(pos, EMPTY_OBJ); }, gLaser.speed * 0.8);
+    console.log('a', pos.i,pos.j);
+    setTimeout(() => { 
+        console.log('d', pos.i,pos.j); 
+        if (gBoard[pos.i][pos.j].gameObject === gLaser.element) updateCell(pos, EMPTY_OBJ); 
+    }, gLaser.speed * 0.8);
 }
 
 function nebsAlienAround(pos) {
