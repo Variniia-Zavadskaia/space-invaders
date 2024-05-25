@@ -99,25 +99,31 @@ function updateCell(pos, gameObject = EMPTY_OBJ) {
 }
 
 function onUpLevel(level) {
-    // console.log('lvl');
-    // if (level === 1) {
-    //     gAliensSpeed = ALIEN_SPEED;
-    //     gAliensRowLength = ALIEN_ROW_LENGTH - 2;
-    // } else if (level === 2) {
-    //     gAliensSpeed = ALIEN_SPEED;
-    //     gAliensRowLength = ALIEN_ROW_LENGTH;
-    // } else if (level === 3) {
-    //     gAliensSpeed = ALIEN_SPEED * 0.6;
-    //     gAliensRowLength = ALIEN_ROW_LENGTH;
-    // }
-    // gGame.isOn = false;
-    // startGame();
+    console.log('lvl');
+    if (level === 1) {
+        gAliensSpeed = ALIEN_SPEED;
+        gAliensRowLength = ALIEN_ROW_LENGTH - 2;
+    } else if (level === 2) {
+        gAliensSpeed = ALIEN_SPEED;
+        gAliensRowLength = ALIEN_ROW_LENGTH;
+    } else if (level === 3) {
+        gAliensSpeed = ALIEN_SPEED * 0.6;
+        gAliensRowLength = ALIEN_ROW_LENGTH;
+    }
+
+    gameOver(true, false)
 }
-function gameOver(isWin) {
+
+function gameOver(isWin, openModal = true) {
     gGame.isOn = false;
-    onOpenModal(isWin);
     clearInterval(gIntervalAliens);
     clearInterval(gCandyIntarval);
+    if (openModal) {
+        onOpenModal(isWin);
+    }
+    else {
+        startGame();
+    }
 }
 
 function onOpenModal(isWin) {
