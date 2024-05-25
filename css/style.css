@@ -34,13 +34,12 @@ h2 {
     align-items: center;
 }
 
-.level button {
-    /* position: fixed; */
+.btn {
+
     display: inline;
     box-sizing: border-box;
     appearance: none;
     background-color: transparent;
-    /* border-radius: 0.6em; */
     cursor: pointer;
     align-self: center;
     font-size: 1.5rem;
@@ -55,6 +54,10 @@ h2 {
     transition: all 150ms ease-in-out;
 }
 
+.btn:active{
+    box-shadow: 0 0 10px 0 rgb(91, 91, 104) inset, 0 0 10px 4px rgb(85, 85, 102);
+}
+
 .start button:hover {
     box-shadow: 0 0 10px 0 rgb(56, 56, 65) inset, 0 0 10px 4px rgb(85, 85, 102);
 }
@@ -64,7 +67,6 @@ h2 {
     position: fixed;
     top: 20%;
     left:23%;
-    /* transform: translate(-50%, -50%); */
     display: inline-block;
     width: 100%;   
 }

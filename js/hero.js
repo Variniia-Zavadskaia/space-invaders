@@ -79,7 +79,6 @@ function moveHero(dir) {
     }
 }
 
-// Sets an interval for shutting (blinking) the laser up towards aliens
 function shoot() {
     if (!gGame.isOn) return;
     if (gHero.isShoot) return;

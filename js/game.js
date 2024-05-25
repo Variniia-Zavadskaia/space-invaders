@@ -10,7 +10,6 @@ var gGame = {
     isOn: false,
     alienCount: 0
 }
-// Called when game loads
 
 function onInit() {
     var elModalStart = document.querySelector('.start');
@@ -103,13 +102,13 @@ function onUpLevel(level) {
 
     if (level === 1) {
         gAliensSpeed = ALIEN_SPEED;
-        gAliensRowLength = ALIEN_ROW_LENGTH - 2;
+        gAliensRowLength = ALIEN_ROW_LENGTH;
     } else if (level === 2) {
         gAliensSpeed = ALIEN_SPEED;
-        gAliensRowLength = ALIEN_ROW_LENGTH;
+        gAliensRowLength = ALIEN_ROW_LENGTH + 2;
     } else if (level === 3) {
         gAliensSpeed = ALIEN_SPEED * 0.6;
-        gAliensRowLength = ALIEN_ROW_LENGTH;
+        gAliensRowLength = ALIEN_ROW_LENGTH + 2;
     }
     gameOver(true, false)
 }

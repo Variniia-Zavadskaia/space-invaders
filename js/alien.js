@@ -1,5 +1,5 @@
 const ALIEN = '<img src="img/ali.png" />'
-const ALIEN_ROW_LENGTH = 8;
+const ALIEN_ROW_LENGTH = 6;
 // const ALIEN_ROW_LENGTH = 4;
 const ALIEN_ROW_COUNT = 3;
 const ALIEN_SPEED = 700;
