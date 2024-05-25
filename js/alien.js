@@ -47,6 +47,8 @@ function shiftBoardRight(board, fromI, toI) {
             if (board[i][j - 1].gameObject !== gLaser.element) {
                 // board[i][j].gameObject = board[i][j - 1].gameObject;
                 updateCell({i,j}, board[i][j - 1].gameObject)
+            } else {
+                updateCell({i,j}, EMPTY_OBJ);
             }
         }
         // board[i][0].gameObject = EMPTY_OBJ
@@ -60,7 +62,8 @@ function shiftBoardLeft(board, fromI, toI) {
             if (board[i][j + 1].gameObject !== gLaser.element) {
                 // board[i][j].gameObject = board[i][j + 1].gameObject;
                 updateCell({i,j}, board[i][j + 1].gameObject)
-
+            } else {
+                updateCell({i,j}, EMPTY_OBJ);
             }
         }
         // board[i][board[i].length - 1].gameObject = EMPTY_OBJ;
@@ -75,6 +78,8 @@ function shiftBoardDown(board, fromI, toI) {
             if (board[i][j].gameObject !== gLaser.element) {
                 // board[i + 1][j].gameObject = board[i][j].gameObject;
                 updateCell({i: (i + 1), j: j}, board[i][j].gameObject)
+            } else {
+                updateCell({i: (i + 1), j: j}, EMPTY_OBJ);
             }
         }
     }

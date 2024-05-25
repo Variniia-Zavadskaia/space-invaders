@@ -110,7 +110,7 @@ function printBoard(prestr) {
     var str = prestr === '' ? '' : (prestr + '\n')
 
     for (var i = 0; i < gBoard.length; i++) {
-        str += '| ';
+        str += i + (i < 10 ? ' ' : '') + ' | ';
         for (var j = 0; j < gBoard[i].length; j++) {
             var obj = gBoard[i][j].gameObject;
 
