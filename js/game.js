@@ -100,6 +100,7 @@ function updateCell(pos, gameObject = EMPTY_OBJ) {
 
 function onUpLevel(level) {
     console.log('lvl');
+
     if (level === 1) {
         gAliensSpeed = ALIEN_SPEED;
         gAliensRowLength = ALIEN_ROW_LENGTH - 2;
@@ -110,7 +111,6 @@ function onUpLevel(level) {
         gAliensSpeed = ALIEN_SPEED * 0.6;
         gAliensRowLength = ALIEN_ROW_LENGTH;
     }
-
     gameOver(true, false)
 }
 

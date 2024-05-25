@@ -76,9 +76,7 @@ h2 {
 .score {
     float: left;
 }
-.super-attacks{
-    /* float: left; */
-}
+
 
 .board {
     position: absolute;
