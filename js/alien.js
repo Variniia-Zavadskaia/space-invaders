@@ -20,10 +20,11 @@ function createAliens(board) {
 
     for (var i = 0; i < ALIEN_ROW_COUNT; i++) {
         for (var j = 0; j < ALIEN_ROW_LENGTH; j++) {
-            gGame.alienCount++;
+            // gGame.alienCount++;
             board[i][j] = { type: SKY, gameObject: ALIEN };
         }
     }
+    gGame.alienCount = ALIEN_ROW_COUNT * ALIEN_ROW_LENGTH;
     gMoveDir = 'right';
     gAliensTopRowIdx = 0;
     gAliensBottomRowIdx = ALIEN_ROW_COUNT - 1;

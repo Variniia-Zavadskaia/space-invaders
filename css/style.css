@@ -27,13 +27,13 @@ h2 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;    
 }
 
-h1{
+/* .b{
     left: 50%;
-}
+} */
 
 .game h2{
     float: left;
-    margin-top: 10%;
+    margin-top: 6%;
 }
 
 .board {

@@ -1,8 +1,9 @@
 const HERO = '<img src="img/sh.png" />'
-const LASER = '⚡️'
-const LASER_SUPER = '〽️'
+const LASER = '⚡️';
+const LASER_SUPER = '〽️';
 const LASER_SPEED = 80;
-const ALIEN_POINTS = 10
+const ALIEN_POINTS = 10;
+
 var gHero;
 var gLaser;
 var gBlinkInterval;
@@ -23,39 +24,39 @@ function createHero(board) {
     }
 
     board[gHero.pos.i][gHero.pos.j] = createCell(HERO);
-    displaySuperAttacks(gHero.countSupAtt)
+    displaySuperAttacks(gHero.countSupAtt);
 }
 
 function onKeyDown(event) {
 
     switch (event.code) {
         case 'ArrowLeft':
-            moveHero(-1)
+            moveHero(-1);
             break
         case 'ArrowRight':
             moveHero(1);
             break;
         case 'Space':
             if (gHero.isShoot) return;
-            shoot()
+            shoot();
             break;
         case 'KeyN':
             if (!gHero.isShoot) return;
             nebsAlienAround(gLaser.pos);
             break;
         case 'KeyF':
-            gIsAlienFreeze = true
+            gIsAlienFreeze = true;
             break;
         case 'KeyU':
-            gIsAlienFreeze = false
+            gIsAlienFreeze = false;
             break;
         case 'KeyX':
             console.log(gHero.countSupAtt);
             if (gHero.isShoot) return
             if (gHero.countSupAtt-- > 0) {
-                gHero.isSuperAttack = true
+                gHero.isSuperAttack = true;
                 gLaser.speed /= 2;
-                gLaser.element = LASER_SUPER
+                gLaser.element = LASER_SUPER;
                 shoot();
                 displaySuperAttacks(gHero.countSupAtt);
             }
@@ -98,12 +99,12 @@ function shoot() {
             gHero.isShoot = false;
             gHero.isSuperAttack = false;
             gLaser.speed = LASER_SPEED;
-            gLaser.element = LASER
+            gLaser.element = LASER;
             clearInterval(gBlinkInterval);
-            return
+            return;
         }
         blinkLaser(gLaser.pos);
-    }, gLaser.speed)
+    }, gLaser.speed);
 }
 
 function blinkLaser(pos) {

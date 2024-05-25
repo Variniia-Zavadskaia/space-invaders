@@ -1,9 +1,10 @@
-const BOARD_SIZE = 14
-const SKY = 'SKY'
-const EARTH = 'EAR'
-const EMPTY_OBJ = null
+const BOARD_SIZE = 14;
+const SKY = 'SKY';
+const EARTH = 'EAR';
+const EMPTY_OBJ = null;
+const CANDY = '<img src="img/candy.png" />';
 
-var gBoard
+var gBoard;
 var gGame = {
     isOn: false,
     alienCount: 0
@@ -21,8 +22,8 @@ function startGame(){
     var elModalStart = document.querySelector('.start');
     elModalStart.style.display = 'none';
 
-    if (gGame.isOn) return
-    gGame.isOn = true
+    if (gGame.isOn) return;
+    gGame.isOn = true;
     gBoard = createBoard();
     printBoard(''); ////////////
     createHero(gBoard);
@@ -41,7 +42,7 @@ function createBoard() {
         for (var j = 0; j < BOARD_SIZE; j++) {
             board[i][j] = createCell();
             if (i === BOARD_SIZE - 1) {
-                board[i][j].type = EARTH
+                board[i][j].type = EARTH;
             }
         }
     }
@@ -77,13 +78,13 @@ function addCandy(){
 }
 
 function updateScore(diff) {
-    gGame.score += diff
+    gGame.score += diff;
     document.querySelector('.score span').innerText = gGame.score
 }
 
 function updateCell(pos, gameObject = EMPTY_OBJ) {
-    gBoard[pos.i][pos.j].gameObject = gameObject
-    var elCell = getElCell(pos)
+    gBoard[pos.i][pos.j].gameObject = gameObject;
+    var elCell = getElCell(pos);
     elCell.innerHTML = gameObject || ''
 }
 
@@ -97,7 +98,7 @@ function onOpenModal(isWin) {
     var elModalRest = document.querySelector('.restart');
     elModalRest.style.display = 'block';
     var elModalRestH2 = document.querySelector('.restart h2')
-    elModalRestH2.innerText = isWin ? 'you Won' : 'Game Over'
+    elModalRestH2.innerText = isWin ? 'you Won' : 'Game Over';
 }
 
 function onCloseModal() {
@@ -109,19 +110,19 @@ function printBoard(prestr) {
     var str = prestr === '' ? '' : (prestr + '\n')
 
     for (var i = 0; i < gBoard.length; i++) {
-        str += '| '
+        str += '| ';
         for (var j = 0; j < gBoard[i].length; j++) {
-            var obj = gBoard[i][j].gameObject
+            var obj = gBoard[i][j].gameObject;
 
-            if (obj === null) obj = 'n'
-            else if (obj === HERO) obj = 'H'
-            else if (obj === ALIEN) obj = 'Al'
+            if (obj === null) obj = 'n';
+            else if (obj === HERO) obj = 'H';
+            else if (obj === ALIEN) obj = 'Al';
 
-            if (obj !== 'Al') obj += ' '
+            if (obj !== 'Al') obj += ' ';
 
-            str += gBoard[i][j].type + ',' + obj + ' | '
+            str += gBoard[i][j].type + ',' + obj + ' | ';
         }
-        str += '\n'
+        str += '\n';
     }   
     console.log(str);
 }
