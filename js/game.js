@@ -3,6 +3,7 @@ const SKY = 'SKY';
 const EARTH = 'EAR';
 const EMPTY_OBJ = null;
 const CANDY = '<img src="img/candy.png" />';
+var gCandyIntarval;
 
 var gBoard;
 var gGame = {
@@ -17,7 +18,7 @@ function onInit() {
     onCloseModal();
 }
 
-function startGame(){
+function startGame() {
 
     var elModalStart = document.querySelector('.start');
     elModalStart.style.display = 'none';
@@ -32,7 +33,8 @@ function startGame(){
     onCloseModal();
     gGame.score = 0;
     document.querySelector('.score span').innerText = gGame.score;
-    gIntervalAliens = setInterval(moveAliens, ALIEN_SPEED);
+    gIntervalAliens = setInterval(moveAliens, gAliensSpeed);
+    gCandyIntarval = setInterval(addCandy, 10000);
 }
 
 function createBoard() {
@@ -73,8 +75,16 @@ function renderBoard(board) {
     elContainer.innerHTML = strHTML;
 }
 
-function addCandy(){
-    // var 
+function addCandy() {
+    console.log('cabdy');
+    var emptyPos = getEmptyCell(gBoard, 0);
+    if (!emptyPos) return;
+    console.log('a', emptyPos.i, emptyPos.j);
+    updateCell(emptyPos, CANDY);
+    setTimeout(() => {
+        console.log('d', emptyPos.i, emptyPos.j);
+        if (gBoard[emptyPos.i][emptyPos.j].gameObject === CANDY) updateCell(emptyPos, EMPTY_OBJ);
+    }, 5000);
 }
 
 function updateScore(diff) {
@@ -88,17 +98,33 @@ function updateCell(pos, gameObject = EMPTY_OBJ) {
     elCell.innerHTML = gameObject || ''
 }
 
-function gameOver(isWin){
+function onUpLevel(level) {
+    // console.log('lvl');
+    // if (level === 1) {
+    //     gAliensSpeed = ALIEN_SPEED;
+    //     gAliensRowLength = ALIEN_ROW_LENGTH - 2;
+    // } else if (level === 2) {
+    //     gAliensSpeed = ALIEN_SPEED;
+    //     gAliensRowLength = ALIEN_ROW_LENGTH;
+    // } else if (level === 3) {
+    //     gAliensSpeed = ALIEN_SPEED * 0.6;
+    //     gAliensRowLength = ALIEN_ROW_LENGTH;
+    // }
+    // gGame.isOn = false;
+    // startGame();
+}
+function gameOver(isWin) {
     gGame.isOn = false;
     onOpenModal(isWin);
-    clearInterval(gIntervalAliens); 
+    clearInterval(gIntervalAliens);
+    clearInterval(gCandyIntarval);
 }
 
 function onOpenModal(isWin) {
     var elModalRest = document.querySelector('.restart');
     elModalRest.style.display = 'block';
     var elModalRestH2 = document.querySelector('.restart h2')
-    elModalRestH2.innerText = isWin ? 'you Won' : 'Game Over';
+    elModalRestH2.innerText = isWin ? 'You Won' : 'Game Over';
 }
 
 function onCloseModal() {
@@ -123,6 +149,6 @@ function printBoard(prestr) {
             str += gBoard[i][j].type + ',' + obj + ' | ';
         }
         str += '\n';
-    }   
+    }
     console.log(str);
 }

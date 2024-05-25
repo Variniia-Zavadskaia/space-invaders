@@ -3,6 +3,7 @@ const LASER = '⚡️';
 const LASER_SUPER = '〽️';
 const LASER_SPEED = 80;
 const ALIEN_POINTS = 10;
+const CANDY_POINTS = 50;
 
 var gHero;
 var gLaser;
@@ -88,10 +89,14 @@ function shoot() {
 
     var gBlinkInterval = setInterval(() => {
         gLaser.pos.i--;
-        if (gBoard[gLaser.pos.i][gLaser.pos.j].gameObject === ALIEN || gLaser.pos.i === 0) {
+        if (gBoard[gLaser.pos.i][gLaser.pos.j].gameObject === ALIEN ||
+            gBoard[gLaser.pos.i][gLaser.pos.j].gameObject === CANDY ||
+            gLaser.pos.i === 0) {
 
             if (gBoard[gLaser.pos.i][gLaser.pos.j].gameObject === ALIEN) {
                 handleAlienHit(gLaser.pos);
+            } else if (gBoard[gLaser.pos.i][gLaser.pos.j].gameObject === CANDY) {
+                candyHit(gLaser.pos)
             } else if (gLaser.pos.i === 0) {
                 blinkLaser(gLaser.pos);
             }
@@ -111,10 +116,10 @@ function blinkLaser(pos) {
 
     var laser = gLaser.element;
     updateCell(pos, laser);
-    console.log('a', pos.i,pos.j);
-    setTimeout(() => { 
-        console.log('d', pos.i,pos.j); 
-        if (gBoard[pos.i][pos.j].gameObject === gLaser.element) updateCell(pos, EMPTY_OBJ); 
+    // console.log('a', pos.i, pos.j);
+    setTimeout(() => {
+        // console.log('d', pos.i, pos.j);
+        if (gBoard[pos.i][pos.j].gameObject === gLaser.element) updateCell(pos, EMPTY_OBJ);
     }, gLaser.speed * 0.8);
 }
 
@@ -128,6 +133,15 @@ function nebsAlienAround(pos) {
             if (gBoard[i][j].gameObject === ALIEN) handleAlienHit({ i, j });
         }
     }
+}
+
+function candyHit(pos) {
+    gIsAlienFreeze = true;
+    updateScore(CANDY_POINTS);
+    updateCell(pos, EMPTY_OBJ);
+    setTimeout(() => {
+        gIsAlienFreeze = false;
+    }, 5000);
 }
 
 function displaySuperAttacks(num) {

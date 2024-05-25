@@ -4,11 +4,9 @@ const ALIEN_ROW_LENGTH = 8;
 const ALIEN_ROW_COUNT = 3;
 const ALIEN_SPEED = 700;
 
+var gAliensRowLength = ALIEN_ROW_LENGTH;
+var gAliensSpeed = ALIEN_SPEED;
 var gIntervalAliens;
-// var gIntervalAliensRight;
-// var gIntervalAliensLeft;
-// var gIntervalAliensDown;
-
 var gAliensTopRowIdx; //from
 var gAliensBottomRowIdx;  //to
 var gMoveDir = 'right';
@@ -19,12 +17,12 @@ var gIsAlienFreeze = false;
 function createAliens(board) {
 
     for (var i = 0; i < ALIEN_ROW_COUNT; i++) {
-        for (var j = 0; j < ALIEN_ROW_LENGTH; j++) {
+        for (var j = 0; j < gAliensRowLength; j++) {
             // gGame.alienCount++;
             board[i][j] = { type: SKY, gameObject: ALIEN };
         }
     }
-    gGame.alienCount = ALIEN_ROW_COUNT * ALIEN_ROW_LENGTH;
+    gGame.alienCount = ALIEN_ROW_COUNT * gAliensRowLength;
     gMoveDir = 'right';
     gAliensTopRowIdx = 0;
     gAliensBottomRowIdx = ALIEN_ROW_COUNT - 1;

@@ -4,8 +4,6 @@
     padding: 0;
 }
 
-
-
 .box {
     color: blanchedalmond;
     padding: 10px;
@@ -13,42 +11,88 @@
 
 body {
     text-align: center;
-    align-items: center;
 }
-.game{
-    position: fixed;
-    top: 10%;
-    left: 20%;
-    transform: translate(-50%, -50%);
+
+h1 {
+    position: relative;
+    color: aliceblue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 50px;
 }
 
 h2 {
     color: aliceblue;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif ;    
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-/* .b{
-    left: 50%;
-} */
+.level {
+    position: fixed;
+    height: 33.33%;
+    width: 100%;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+}
 
-.game h2{
+.level button {
+    /* position: fixed; */
+    display: inline;
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    /* border-radius: 0.6em; */
+    cursor: pointer;
+    align-self: center;
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0.2em 0.5em;
+    text-decoration: none;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+    border-color: rgba(34, 34, 44, 0.755);
+    color: #fff;
+    box-shadow: 0 0 40px 40px rgba(66, 66, 100, 0.778) inset, 0 0 0 0 rgb(53, 53, 80);
+    transition: all 150ms ease-in-out;
+}
+
+.start button:hover {
+    box-shadow: 0 0 10px 0 rgb(56, 56, 65) inset, 0 0 10px 4px rgb(85, 85, 102);
+}
+
+
+.game {
+    position: fixed;
+    top: 20%;
+    left:23%;
+    /* transform: translate(-50%, -50%); */
+    display: inline-block;
+    width: 100%;   
+}
+
+.game h2 {
+    display: inline-block;
+}
+
+.score {
     float: left;
-    margin-top: 6%;
+}
+.super-attacks{
+    /* float: left; */
 }
 
 .board {
     position: absolute;
-    top: 50%;
+    top: 62%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin-top: 5%;
+    border-left: dotted 5px rgb(78, 80, 78);
+    border-right: dotted 5px rgb(78, 80, 78);
 }
 
 .cell {
-    /* border-style: dotted; */
-    font-size: 1.5em;
-    width: 1.8em;
-    height: 1.8em;
+    font-size: 1.2em;
+    width: 2em;
+    height: 2em;
     border-radius: 0.6em;
 }
 
@@ -93,7 +137,6 @@ img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }
 
 .restart button {
@@ -119,11 +162,12 @@ img {
     box-shadow: 0 0 10px 0 rgb(56, 56, 65) inset, 0 0 10px 4px rgb(85, 85, 102);
 }
 
-.restart h2{
+.restart h2 {
     margin-bottom: 10%;
     font-size: 40px;
 
 }
+
 .stars,
 .twinkling {
     position: absolute;

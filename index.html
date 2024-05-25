@@ -9,14 +9,26 @@
 </head>
 
 <body onload="onInit()" onkeydown="onKeyDown(event)">
+    
+    
     <div class="stars"></div>
     <div class="twinkling"></div>
-
+    
     <div class="start"><button onclick="startGame()">Start Game</button></div>
+    
+    <div class="box name">
+        <h1 class="name">SPACE INVADERS</h1>
+    </div>
+    
+    <div class="level">
+        <h4>Chose your level</h4>
+        <button onclick="onUpLevel(1)">Easy</button>
+        <button onclick="onUpLevel(2)">Hard</button>
+        <button onclick="onUpLevel(3)">Extreme</button>
+    </div>
 
-    <div class="box game">
-        <h1 class="head">SPACE INVADERS</h1>
-        <h2 class="score">SCORE: <span>0</span></h2><br>
+    <div class="game">
+        <h2 class="score">SCORE: <span>0</span></h2>
         <h2 class="super-attacks">SUPPER ATTACKS: <span>0</span></h2>
     </div>
 
